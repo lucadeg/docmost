@@ -9,10 +9,25 @@ export function getUserRoomName(userId: string): string {
   return `user-${userId}`;
 }
 
+export function getSessionRoomName(sessionId: string): string {
+  return `session-${sessionId}`;
+}
+
 export const TREE_EVENTS = new Set([
   'updateOne',
   'addTreeNode',
   'moveTreeNode',
   'deleteTreeNode',
   'refetchRootTreeNodeEvent',
+]);
+
+export function getBaseRoomName(pageId: string): string {
+  return `base-${pageId}`;
+}
+
+export const BASE_INBOUND_EVENTS = new Set([
+  'base:subscribe',
+  'base:unsubscribe',
+  'base:presence',
+  'base:presence:leave',
 ]);

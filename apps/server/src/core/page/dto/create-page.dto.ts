@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsIn,
   IsOptional,
   IsString,
@@ -31,5 +32,5 @@ export class CreatePageDto {
   @ValidateIf((o) => o.content !== undefined)
   @Transform(({ value }) => value?.toLowerCase() ?? 'json')
   @IsIn(['json', 'markdown', 'html'])
-  format?: ContentFormat;
+  format?: ContentFormat = 'json';
 }

@@ -3,14 +3,17 @@ import { CreateWorkspaceDto } from './create-workspace.dto';
 import {
   IsArray,
   IsBoolean,
+  IsIn,
   IsInt,
   IsOptional,
+  IsString,
   Min,
 } from 'class-validator';
 
 export class UpdateWorkspaceDto extends PartialType(CreateWorkspaceDto) {
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   emailDomains: string[];
 
   @IsOptional()
@@ -39,6 +42,14 @@ export class UpdateWorkspaceDto extends PartialType(CreateWorkspaceDto) {
 
   @IsOptional()
   @IsBoolean()
+  allowPublicSpaces: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  publicSpacesDirectory: boolean;
+
+  @IsOptional()
+  @IsBoolean()
   mcpEnabled: boolean;
 
   @IsOptional()
@@ -57,4 +68,25 @@ export class UpdateWorkspaceDto extends PartialType(CreateWorkspaceDto) {
   @IsOptional()
   @IsBoolean()
   allowMemberTemplates: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  allowPersonalSpaces: boolean;
+
+  @IsOptional()
+  @IsString()
+  @IsIn(['read', 'edit'])
+  defaultPageEditMode: string;
+
+  @IsOptional()
+  @IsBoolean()
+  aiChatReadOnly: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  aiChatWorkspaceKnowledgeOnly: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  enforceMcpOauth: boolean;
 }

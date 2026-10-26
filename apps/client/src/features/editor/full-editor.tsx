@@ -26,6 +26,7 @@ import { useAsideTriggerProps } from "@/hooks/use-toggle-aside.tsx";
 import { DeletedPageBanner } from "@/features/page/trash/components/deleted-page-banner.tsx";
 import clsx from "clsx";
 import { currentPageEditModeAtom } from "@/features/editor/atoms/editor-atoms.ts";
+import { EmptyPageGetStarted } from "@/features/editor/components/empty-page/empty-page-get-started";
 
 const MemoizedTitleEditor = React.memo(TitleEditor);
 const MemoizedPageEditor = React.memo(PageEditor);
@@ -47,6 +48,7 @@ export interface FullEditorProps {
   slugId: string;
   title: string;
   content: string;
+  spaceId: string;
   spaceSlug: string;
   editable: boolean;
   creator?: PageUser;
@@ -59,6 +61,7 @@ export function FullEditor({
   title,
   slugId,
   content,
+  spaceId,
   spaceSlug,
   editable,
   creator,
@@ -66,30 +69,31 @@ export function FullEditor({
   canComment,
 }: FullEditorProps) {
   const [user] = useAtom(userAtom);
-  const fullPageWidth = user.settings?.preferences?.fullPageWidth;
+  const fullPageWidth = user?.settings?.preferences?.fullPageWidth;
   const editorToolbarEnabled =
-    user.settings?.preferences?.editorToolbar ?? false;
+    user?.settings?.preferences?.editorToolbar ?? false;
   const [currentPageEditMode, setCurrentPageEditMode] = useAtom(
     currentPageEditModeAtom,
   );
   const userPageEditMode =
-    user.settings?.preferences?.pageEditMode ?? PageEditMode.Edit;
+    user?.settings?.preferences?.pageEditMode ?? PageEditMode.Edit;
   const isEditMode = currentPageEditMode === PageEditMode.Edit;
 
   // Apply the user's saved preference only once on initial load, not on every
   // page navigation — so the mode sticks across navigations within a session.
   useEffect(() => {
-    if (!defaultEditModeApplied) {
+    if (user && !defaultEditModeApplied) {
       setCurrentPageEditMode(userPageEditMode as PageEditMode);
       defaultEditModeApplied = true;
     }
-  }, [userPageEditMode, setCurrentPageEditMode]);
+  }, [user, userPageEditMode, setCurrentPageEditMode]);
 
   return (
     <Container
       fluid={fullPageWidth}
       size={!fullPageWidth && 900}
       className={classes.editor}
+      style={{ display: "flex", flexDirection: "column" }}
     >
       {editorToolbarEnabled && editable && isEditMode && (
         <MemoizedFixedToolbar />
@@ -112,6 +116,11 @@ export function FullEditor({
         editable={editable}
         content={content}
         canComment={canComment}
+      />
+      <EmptyPageGetStarted
+        pageId={pageId}
+        spaceId={spaceId}
+        editable={editable}
       />
     </Container>
   );

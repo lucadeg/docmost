@@ -3,8 +3,13 @@ import {
   AiChats,
   AiChatMessages,
   Attachments,
+  BaseProperties,
+  BaseRows,
+  BaseViews,
   Comments,
   Groups,
+  Integrations as _Integrations,
+  IntegrationConnections as _IntegrationConnections,
   Labels,
   Notifications,
   PageLabels,
@@ -28,15 +33,21 @@ import {
   AuthProviders,
   AuthAccounts,
   Shares,
+  PublicSpaces,
   Favorites,
   FileTasks,
   UserMfa as _UserMFA,
   UserSessions,
   ApiKeys,
   ScimTokens,
+  SiemDestinations,
   Watchers,
   Audit as _Audit,
   Templates,
+  OauthClients,
+  OauthAuthorizationCodes,
+  OauthGrants,
+  OauthTokens,
 } from './db';
 import { PageEmbeddings } from '@docmost/db/types/embeddings.types';
 
@@ -144,6 +155,11 @@ export type Share = Selectable<Shares>;
 export type InsertableShare = Insertable<Shares>;
 export type UpdatableShare = Updateable<Omit<Shares, 'id'>>;
 
+// PublicSpace
+export type PublicSpace = Selectable<PublicSpaces>;
+export type InsertablePublicSpace = Insertable<PublicSpaces>;
+export type UpdatablePublicSpace = Updateable<Omit<PublicSpaces, 'id'>>;
+
 // Favorite
 export type Favorite = Selectable<Favorites>;
 export type InsertableFavorite = Insertable<Favorites>;
@@ -181,6 +197,13 @@ export type ScimToken = Selectable<ScimTokens>;
 export type InsertableScimToken = Insertable<ScimTokens>;
 export type UpdatableScimToken = Updateable<Omit<ScimTokens, 'id'>>;
 
+// OAuth
+export type OAuthClient = Selectable<OauthClients>;
+export type InsertableOAuthClient = Insertable<OauthClients>;
+export type OAuthGrant = Selectable<OauthGrants>;
+export type OAuthAuthorizationCode = Selectable<OauthAuthorizationCodes>;
+export type OAuthToken = Selectable<OauthTokens>;
+
 // Page Embedding
 export type PageEmbedding = Selectable<PageEmbeddings>;
 export type InsertablePageEmbedding = Insertable<PageEmbeddings>;
@@ -195,6 +218,19 @@ export type UpdatableNotification = Updateable<Omit<Notifications, 'id'>>;
 export type Watcher = Selectable<Watchers>;
 export type InsertableWatcher = Insertable<Watchers>;
 export type UpdatableWatcher = Updateable<Omit<Watchers, 'id'>>;
+
+// Integration
+export type Integration = Selectable<_Integrations>;
+export type InsertableIntegration = Insertable<_Integrations>;
+export type UpdatableIntegration = Updateable<Omit<_Integrations, 'id'>>;
+
+// Integration Connection
+export type IntegrationConnection = Selectable<_IntegrationConnections>;
+export type InsertableIntegrationConnection =
+  Insertable<_IntegrationConnections>;
+export type UpdatableIntegrationConnection = Updateable<
+  Omit<_IntegrationConnections, 'id'>
+>;
 
 // Label
 export type Label = Selectable<Labels>;
@@ -238,3 +274,23 @@ export type UpdatableAudit = Updateable<Omit<_Audit, 'id'>>;
 export type Template = Selectable<Templates>;
 export type InsertableTemplate = Insertable<Templates>;
 export type UpdatableTemplate = Updateable<Omit<Templates, 'id'>>;
+
+// Base Property
+export type BaseProperty = Selectable<BaseProperties>;
+export type InsertableBaseProperty = Insertable<BaseProperties>;
+export type UpdatableBaseProperty = Updateable<Omit<BaseProperties, 'id'>>;
+
+// Base Row
+export type BaseRow = Selectable<BaseRows>;
+export type InsertableBaseRow = Insertable<BaseRows>;
+export type UpdatableBaseRow = Updateable<Omit<BaseRows, 'id'>>;
+
+// Base View
+export type BaseView = Selectable<BaseViews>;
+export type InsertableBaseView = Insertable<BaseViews>;
+export type UpdatableBaseView = Updateable<Omit<BaseViews, 'id'>>;
+
+// SIEM destinations
+export type SiemDestination = Selectable<SiemDestinations>;
+export type InsertableSiemDestination = Insertable<SiemDestinations>;
+export type UpdatableSiemDestination = Updateable<Omit<SiemDestinations, 'id'>>;
